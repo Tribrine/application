@@ -1,0 +1,27 @@
+#version: '3'
+
+name: test-project
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:${MYSQL_VERSION}
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - test_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping --silent
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  test_mysql_data:
+    driver: local
+
+networks:
+  default:
+    name: test_default
