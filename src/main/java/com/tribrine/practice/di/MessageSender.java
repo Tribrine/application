@@ -9,12 +9,24 @@ public class MessageSender {
 
     private final MessageService messageService;
 
-    @Autowired
+    private MessageService smsService;
+
+    //@Autowired
     public MessageSender(@Qualifier("emailService") MessageService messageService) {
         this.messageService = messageService;
+        System.out.println("Initializing MessageSender 1");
+    }
+
+    @Autowired
+    public MessageSender(@Qualifier("emailService") MessageService messageService, @Qualifier("sms") MessageService smsService) {
+        this.messageService = messageService;
+        this.smsService = smsService;
+        System.out.println("Initializing MessageSender 2");
     }
 
     public void sendMessage(String message) {
+
         messageService.sendMessage(message);
+        smsService.sendMessage(message);
     }
 }
