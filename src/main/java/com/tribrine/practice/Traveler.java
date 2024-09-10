@@ -2,7 +2,7 @@ package com.tribrine.practice;
 
 //import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component("traveler")
@@ -12,7 +12,7 @@ public class Traveler {
     private final Vehicle vehicle;
 
     @Autowired
-    public Traveler(@Qualifier("car") Vehicle vehicle) {
+    public Traveler(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
 
