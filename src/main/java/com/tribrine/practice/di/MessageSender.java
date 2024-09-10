@@ -7,21 +7,33 @@ import org.springframework.stereotype.Component;
 @Component("msgSender")
 public class MessageSender {
 
-    private final MessageService messageService;
+    private MessageService messageService;
 
     private MessageService smsService;
 
-    //@Autowired
-    public MessageSender(@Qualifier("emailService") MessageService messageService) {
+//    //@Autowired
+//    public MessageSender(@Qualifier("emailService") MessageService messageService) {
+//        this.messageService = messageService;
+//        System.out.println("Initializing MessageSender 1");
+//    }
+//
+//    @Autowired
+//    public MessageSender(@Qualifier("emailService") MessageService messageService, @Qualifier("sms") MessageService smsService) {
+//        this.messageService = messageService;
+//        this.smsService = smsService;
+//        System.out.println("Initializing MessageSender 2");
+//    }
+
+    @Autowired
+    public void setMessageService(@Qualifier("emailService") MessageService messageService) {
         this.messageService = messageService;
-        System.out.println("Initializing MessageSender 1");
+        System.out.println("Set MessageService MAIL");
     }
 
     @Autowired
-    public MessageSender(@Qualifier("emailService") MessageService messageService, @Qualifier("sms") MessageService smsService) {
-        this.messageService = messageService;
+    public void setSmsService(@Qualifier("sms") MessageService smsService) {
         this.smsService = smsService;
-        System.out.println("Initializing MessageSender 2");
+        System.out.println("Set MessageService SMS");
     }
 
     public void sendMessage(String message) {
